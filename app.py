@@ -6,21 +6,18 @@ import pandas as pd
 
 ########### Define your variables ######
 
-tabtitle = 'DC Housing'
-myheading='Analysis of housing prices in Washington DC'
-neighborhood='Columbia Heights'
-color1='#04F9E6'
-color2='#1B03B1'
+tabtitle = 'DC Housing Prices'
+myheading='Analysis of Housing Prices in Washington, DC'
+neighborhood='Cleveland Park'
+color1='algae'
+color2='twilight'
 sourceurl = 'https://www.kaggle.com/christophercorrea/dc-residential-properties/'
-githublink = 'https://github.com/austinlasseter/dash-scatterplot-housing'
+githublink = 'https://github.com/aidanjdm/dash-scatterplot-housing'
 
 ########### Prepare the dataframe
 df = pd.read_csv('DC_Properties.csv')
 df=df[df['ASSESSMENT_NBHD']==neighborhood]
-df=df[(df['PRICE']<=1000000) & (df['PRICE']>=10000)]
-df=df[df['LANDAREA']<4000]
-df=df[df['PRICE']<900000]
-df=df[df['BEDRM']<8]
+df=df[df['PRICE'] <= 1000000]
 
 ########### Set up the chart
 trace = go.Scatter(
@@ -30,7 +27,6 @@ trace = go.Scatter(
     marker=dict(
         size=8,
         color = df['BEDRM'], # set color equal to a third variable
-        colorscale=[color1, color2],
         colorbar=dict(title='Bedrooms'),
         showscale=True
     )
